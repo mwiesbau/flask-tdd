@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t mwiesbau/flask-tdd-docker -f Dockerfile.prod .
+  - docker push mwiesbau/flask-tdd-docker
+
+script:
+  - docker container run -e CI=true -n flask-tdd mwiesbau/flask-tdd-docker
+  - docker container exec flask-tdd pytest "project/tests" -p no:warnings
