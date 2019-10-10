@@ -4,7 +4,6 @@ services:
 
 before_install:
   - docker build -t mwiesbau/flask-tdd-docker -f Dockerfile.prod .
-  - docker push mwiesbau/flask-tdd-docker
 
 script:
   - docker container run -e CI=true -n flask-tdd mwiesbau/flask-tdd-docker
